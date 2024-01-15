@@ -18,10 +18,11 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 public class Transaction {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal value;
+    private BigDecimal transectionValue;
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
