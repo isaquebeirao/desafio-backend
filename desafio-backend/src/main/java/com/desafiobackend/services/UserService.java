@@ -3,11 +3,14 @@ package com.desafiobackend.services;
 
 import com.desafiobackend.domain.user.User;
 import com.desafiobackend.domain.user.UserType;
+import com.desafiobackend.dtos.UserDTO;
 import com.desafiobackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -29,6 +32,15 @@ public class UserService {
         }
     }
 
+    public User createUser(UserDTO data) {
+
+        User newUser = new User(data);
+        return userRepository.save(newUser);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
     public User findUserById(Long id) throws Exception {
         return this.userRepository.findUserById(id).orElseThrow(() -> new Exception("User not found"));
     }
@@ -36,5 +48,4 @@ public class UserService {
     public void saveUser(User user) {
         this.userRepository.save(user);
     }
-
 }
